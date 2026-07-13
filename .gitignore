@@ -10,12 +10,12 @@ env/
 .streamlit/
 
 # Model artifacts (large binaries)
-models/*.joblib
-models/*.pth
+# models/*.joblib
+# models/*.pth
 
 # Data
-data/raw_weather.csv
-data/processed_weather.csv
+# data/raw_weather.csv
+# data/processed_weather.csv
 
 # OS / Editor
 .DS_Store
