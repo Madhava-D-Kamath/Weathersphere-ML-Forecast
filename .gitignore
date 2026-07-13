@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+
+# Streamlit
+.streamlit/
+
+# Model artifacts (large binaries)
+models/*.joblib
+models/*.pth
+
+# Data
+data/raw_weather.csv
+data/processed_weather.csv
+
+# OS / Editor
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log

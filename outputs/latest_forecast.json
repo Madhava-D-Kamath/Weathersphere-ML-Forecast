@@ -1,0 +1,15 @@
+{
+  "location": "Shivamogga, Shimoga District, Karnataka, India",
+  "coordinates": "13.93157,75.56791",
+  "temp_today": 29.7,
+  "temp_tomorrow": 26.31509017944336,
+  "humidity": 55.0,
+  "wind_speed": 20.7,
+  "pressure": 1008.8,
+  "precipitation": 0.0,
+  "model_used": "PyTorch LSTM",
+  "biometeorological_alert": "NORMAL",
+  "risk_penalty_percentage": 0.0,
+  "health_guidelines": "Weather conditions are within normal bounds. No environmental health warning is active.",
+  "timestamp": "2026-07-13 15:26:28"
+}
