@@ -3,7 +3,7 @@ import requests
 import pandas as pd
 from datetime import datetime, timedelta
 
-def fetch_weather_data(lat=19.0760, lon=72.8777, city="Mumbai, India"):
+def fetch_weather_data(lat=19.0760, lon=72.8777, city="Shivamogga,Shimoga District, Karnataka, India"):
     try:
         print(f"Fetching historical weather data for {city}...")
     except UnicodeEncodeError:
