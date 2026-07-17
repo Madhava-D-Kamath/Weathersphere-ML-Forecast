@@ -855,6 +855,68 @@ realtime_data = fetch_realtime_weather(active_lat, active_lon)
 forecast_temp = 0.0
 latest_obs_date = None
 
+if not realtime_data:
+    st.warning("⚠️ Failed to reach Real-Time Weather API. Showing cached forecasts.")
+    # Build a simulated realtime_data structure from the local raw_df
+    last_df = raw_df.tail(41).copy()
+    if len(last_df) >= 30:
+        daily_dict = {
+            "time": last_df['date'].dt.strftime("%Y-%m-%d").tolist(),
+            "temperature_2m_max": last_df['temp_max'].tolist(),
+            "temperature_2m_min": last_df['temp_min'].tolist(),
+            "temperature_2m_mean": last_df['temp_mean'].tolist(),
+            "relative_humidity_2m_mean": last_df['humidity'].tolist(),
+            "precipitation_sum": last_df['precipitation'].tolist(),
+            "wind_speed_10m_max": last_df['wind_speed'].tolist(),
+            "pressure_msl_mean": last_df['pressure'].tolist(),
+            "weather_code": [0] * len(last_df)
+        }
+        
+        last_row = last_df.iloc[-1]
+        current_dict = {
+            "temperature_2m": float(last_row['temp_mean']),
+            "relative_humidity_2m": float(last_row['humidity']),
+            "precipitation": float(last_row['precipitation']),
+            "pressure_msl": float(last_row['pressure']),
+            "wind_speed_10m": float(last_row['wind_speed'])
+        }
+        
+        hourly_times = []
+        hourly_temps = []
+        hourly_humidity = []
+        hourly_precip_prob = []
+        hourly_wind = []
+        hourly_pressure = []
+        hourly_codes = []
+        
+        base_date = last_row['date']
+        for hour in range(24):
+            hour_dt = base_date.replace(hour=hour, minute=0)
+            hourly_times.append(hour_dt.strftime("%Y-%m-%dT%H:%M"))
+            diurnal_var = np.sin((hour - 6) * np.pi / 12.0) * ((last_row['temp_max'] - last_row['temp_min']) / 2.0)
+            hourly_temps.append(float(last_row['temp_mean'] + diurnal_var))
+            hourly_humidity.append(float(last_row['humidity']))
+            hourly_precip_prob.append(20 if last_row['precipitation'] > 0 else 0)
+            hourly_wind.append(float(last_row['wind_speed']))
+            hourly_pressure.append(float(last_row['pressure']))
+            hourly_codes.append(0)
+            
+        hourly_dict = {
+            "time": hourly_times,
+            "temperature_2m": hourly_temps,
+            "relative_humidity_2m": hourly_humidity,
+            "precipitation_probability": hourly_precip_prob,
+            "wind_speed_10m": hourly_wind,
+            "pressure_msl": hourly_pressure,
+            "weather_code": hourly_codes
+        }
+        
+        realtime_data = {
+            "current": current_dict,
+            "daily": daily_dict,
+            "hourly": hourly_dict
+        }
+
 if realtime_data:
     try:
         daily_data = realtime_data.get("daily", {})
@@ -870,7 +932,7 @@ if realtime_data:
         st.error(f"Error calculating real-time prediction with {best_model_name}: {e}")
         st.stop()
 else:
-    st.error("⚠️ Failed to reach Real-Time Weather API. Showing cached forecasts.")
+    st.error("⚠️ Failed to reach Real-Time Weather API and no cached local data available.")
     st.stop()
 
 forecast_date = latest_obs_date + timedelta(days=1)
