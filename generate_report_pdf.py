@@ -138,6 +138,34 @@ def generate_pdf():
         0, 'L'
     )
     
+    # Add page break for tech tools, working, and commands
+    pdf.add_page()
+
+    # Technical Stack & Tools
+    pdf.add_section_header("6. Technical Stack & Tools Used")
+    pdf.add_bullet_point("Core Runtime", "Python 3.14 / 3.9+ runtime environments.")
+    pdf.add_bullet_point("Front-End Framework", "Streamlit (glassmorphism user interface dashboard frame).")
+    pdf.add_bullet_point("Deep Learning Library", "PyTorch (deep learning LSTM, GRU, and Bi-LSTM models).")
+    pdf.add_bullet_point("Machine Learning Baseline", "Scikit-Learn (tabular Random Forest Regressor baseline).")
+    pdf.add_bullet_point("Interactive Telemetry Charts", "Plotly (interactive double-axis weather curves & validation charts).")
+    pdf.add_bullet_point("Data Transformation Suite", "Pandas and NumPy (time-series aggregations, lags, rolling averages, season encodings).")
+    pdf.add_bullet_point("PDF Compilation Library", "FPDF2 (compiled automated project reports).")
+
+    # Workflow & How it Works
+    pdf.add_section_header("7. How the Project Works (Workflow)")
+    pdf.add_bullet_point("Data Ingestion", "Fetches 5 years of local daily variables from Open-Meteo APIs on the fly based on coordinate context.")
+    pdf.add_bullet_point("Preprocessing Engine", "Enforces lag offsets, rolling averages, cyclic dates, and chronological train-test splits.")
+    pdf.add_bullet_point("Ensemble Training", "Trains PyTorch deep sequence models along with Scikit-Learn regressors with validation comparisons.")
+    pdf.add_bullet_point("Live Telemetry Dashboards", "Overlays interactive Windy weather radar satellite maps, Plotly forecast trends, and medical alert panels.")
+
+    # Execution Commands
+    pdf.add_section_header("8. Commands to Run the Project")
+    pdf.add_bullet_point("Activate Virtual Environment (Windows)", ".\\.venv\\Scripts\\Activate.ps1")
+    pdf.add_bullet_point("Install Project Dependencies", "pip install -r requirements.txt")
+    pdf.add_bullet_point("Run Training Pipeline", "python src/pipeline.py")
+    pdf.add_bullet_point("Start Streamlit Dashboard", "streamlit run app.py")
+    pdf.add_bullet_point("Compile PDF Project Report", "python generate_report_pdf.py")
+    
     output_path = "../WeatherSphere_AI_Report.pdf"
     pdf.output(output_path)
     print(f"Report successfully saved to: {os.path.abspath(output_path)}")
