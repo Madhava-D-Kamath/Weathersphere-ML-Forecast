@@ -441,11 +441,6 @@ st.markdown("""
         height: 100%;
         border-radius: 9999px;
     }
-    
-    /* Disable all pointer interactions on sidebar maps to avoid cut-off menus on touch/click */
-    [data-testid="stSidebar"] iframe {
-        pointer-events: none !important;
-    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -804,12 +799,7 @@ st.sidebar.markdown("""
 mini_windy_url = f"https://embed.windy.com/embed2.html?lat={active_lat}&lon={active_lon}&zoom=5&level=surface&overlay=radar&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=false&metricWind=default&metricTemp=default&radarRange=-1"
 
 with st.sidebar:
-    st.components.v1.html(f"""
-    <div style="position: relative; width: 100%; height: 200px; overflow: hidden; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
-        <iframe src="{mini_windy_url}" width="100%" height="200" style="border: none; pointer-events: none;" scrolling="no"></iframe>
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; background: transparent; cursor: default;"></div>
-    </div>
-    """, height=202)
+    st.components.v1.iframe(mini_windy_url, height=380, scrolling=False)
 
 # 7-day extended forecast row
 st.sidebar.markdown("""

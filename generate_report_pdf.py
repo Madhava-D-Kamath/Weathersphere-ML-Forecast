@@ -121,7 +121,7 @@ def generate_pdf():
 
     # Upgrades Implemented
     pdf.add_section_header("4. Key Upgrades Implemented")
-    pdf.add_bullet_point("Live Radar Integration", "Replaced static visual overlays with premium interactive Windy.com satellite weather maps centered dynamically on active coordinates, including a clean live visual preview widget in the sidebar.")
+    pdf.add_bullet_point("Live Radar Integration", "Replaced static visual overlays with premium interactive Windy.com satellite weather maps centered dynamically on active coordinates, both in the main page and sidebar.")
     pdf.add_bullet_point("Actual 24-Hour Forecasts", "Replaced simulated sin-wave temperature charts with real-time hourly telemetry plotted using interactive double-axis Plotly charts.")
     pdf.add_bullet_point("WMO Code Translation", "Added a condition mapper parsing World Meteorological Organization indexes to translate raw numerical status codes into condition names and text descriptions.")
     pdf.add_bullet_point("Physiological Alert Banners", "Connected live measurements (heat load index, high gusts, barometric shifts) to dynamic biometeorological alert panels rendering medical guidelines and cardiorespiratory risk offsets.")
