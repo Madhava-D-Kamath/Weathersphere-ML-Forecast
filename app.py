@@ -796,7 +796,7 @@ st.sidebar.markdown("""
 <div style="font-size:0.8rem; color:#9ca3af; font-weight:600; text-align:left; margin-top:1.5rem; margin-bottom:0.5rem; text-transform:uppercase; letter-spacing:0.05em;">Map Visualization (Live)</div>
 """, unsafe_allow_html=True)
 
-mini_windy_url = f"https://embed.windy.com/embed2.html?lat={active_lat}&lon={active_lon}&zoom=5&level=surface&overlay=radar&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1"
+mini_windy_url = f"https://embed.windy.com/embed2.html?lat={active_lat}&lon={active_lon}&zoom=5&level=surface&overlay=radar&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=false&metricWind=default&metricTemp=default&radarRange=-1"
 
 with st.sidebar:
     st.components.v1.iframe(mini_windy_url, height=180, scrolling=False)
@@ -1429,8 +1429,25 @@ elif active_tab == "Alerts":
 elif active_tab == "Maps":
     st.markdown("### 🗺️ Interactive Live Weather radar & Satellite map")
     
-    # Premium interactive Windy widget embedded via iframe
-    windy_url = f"https://embed.windy.com/embed2.html?lat={active_lat}&lon={active_lon}&zoom=7&level=surface&overlay=wind&menu=&message=true&marker=true&calendar=now&pressure=true&type=map&location=coordinates&detail=true&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1"
+    # Dynamic Map Layer Selector
+    map_layer = st.radio(
+        "Select Live Map Layer:",
+        options=["📡 Weather Radar", "🛰️ Satellite Map", "💨 Wind Velocity", "🌡️ Temperature Layer", "🌧️ Rain / Accumulation"],
+        horizontal=True
+    )
+    
+    layer_map = {
+        "📡 Weather Radar": "radar",
+        "🛰️ Satellite Map": "satellite",
+        "💨 Wind Velocity": "wind",
+        "🌡️ Temperature Layer": "temp",
+        "🌧️ Rain / Accumulation": "rain"
+    }
+    
+    overlay = layer_map[map_layer]
+    
+    # Premium interactive Windy widget embedded via iframe (with detail=false to hide white details pane)
+    windy_url = f"https://embed.windy.com/embed2.html?lat={active_lat}&lon={active_lon}&zoom=7&level=surface&overlay={overlay}&menu=&message=true&marker=true&calendar=now&pressure=true&type=map&location=coordinates&detail=false&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1"
     
     st.components.v1.iframe(windy_url, height=550, scrolling=False)
     

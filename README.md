@@ -78,6 +78,7 @@ weathersphere-ai/
 │   ├── evaluate.py               # Combined model validation and graph output generator
 │   └── pipeline.py               # Orchestrator script for the training workflow
 ├── app.py                        # Premium glassmorphism Streamlit dashboard
+├── generate_report_pdf.py        # PDF technical report builder script
 ├── requirements.txt              # Project package dependencies
 └── README.md                     # Documentation (this file)
 ```
@@ -177,6 +178,10 @@ The platform communicates with the following external endpoints:
 * **Integration Tests**: Execute pipeline scripts and ensure metrics output compiles correctly:
   ```bash
   python src/evaluate.py
+  ```
+* **PDF Report Generation**: Compile and export the PDF report:
+  ```bash
+  python generate_report_pdf.py
   ```
 
 ---
