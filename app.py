@@ -441,6 +441,11 @@ st.markdown("""
         height: 100%;
         border-radius: 9999px;
     }
+    
+    /* Disable all pointer interactions on sidebar maps to avoid cut-off menus on touch/click */
+    [data-testid="stSidebar"] iframe {
+        pointer-events: none !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
