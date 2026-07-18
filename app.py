@@ -678,8 +678,19 @@ else:
     with open(coords_path, 'w', encoding='utf-8') as f:
         f.write(f"{active_lat},{active_lon}")
 
+# Fetch Real-Time weather observations and daily sequence values early to get local time context
+realtime_data = fetch_realtime_weather(active_lat, active_lon)
+
 # App Header (Figma Top Bar Style)
-current_time_str = datetime.now().strftime('%b %d, %Y | %I:%M %p')
+from datetime import timezone as dt_timezone, timedelta
+utc_now = datetime.now(dt_timezone.utc)
+if realtime_data and "utc_offset_seconds" in realtime_data:
+    local_now = utc_now + timedelta(seconds=realtime_data["utc_offset_seconds"])
+else:
+    # Default to IST (UTC+5:30)
+    local_now = utc_now + timedelta(hours=5, minutes=30)
+
+current_time_str = local_now.strftime('%b %d, %Y | %I:%M %p')
 st.markdown(f"""
 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2.5rem; padding-bottom:1.2rem; border-bottom:1px solid rgba(255,255,255,0.05); margin-top: -30px;">
     <div style="display:flex; align-items:center; gap:12px;">
@@ -859,8 +870,8 @@ st.sidebar.markdown("---")
 st.sidebar.subheader("🤖 Models Active")
 st.sidebar.info("1. **Random Forest Regressor**\n2. **PyTorch LSTM**")
 
-# Fetch Real-Time weather observations and daily sequence values
-realtime_data = fetch_realtime_weather(active_lat, active_lon)
+# Fetch Real-Time weather observations and daily sequence values (already fetched early for timezone context)
+pass
 
 # Calculate Next-Day Forecast (Real-Time tomorrow forecast)
 forecast_temp = 0.0
