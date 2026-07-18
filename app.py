@@ -800,8 +800,9 @@ mini_windy_url = f"https://embed.windy.com/embed2.html?lat={active_lat}&lon={act
 
 with st.sidebar:
     st.components.v1.html(f"""
-    <div style="pointer-events: none; width: 100%; height: 200px; overflow: hidden; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
-        <iframe src="{mini_windy_url}" width="100%" height="200" style="border: none;" scrolling="no"></iframe>
+    <div style="position: relative; width: 100%; height: 200px; overflow: hidden; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+        <iframe src="{mini_windy_url}" width="100%" height="200" style="border: none; pointer-events: none;" scrolling="no"></iframe>
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; background: transparent; cursor: default;"></div>
     </div>
     """, height=202)
 
