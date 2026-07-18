@@ -33,7 +33,7 @@ By fetching a 5-year local climate profile of any city, it performs statistical 
 * **🕒 Live 24-Hour Forecast**: Dynamic temperature trend curves and precipitation probability bars mapped directly from real hourly Open-Meteo telemetry.
 * **📅 Live 10-Day Extended Forecast**: Dynamic forecast cards fetching 10-day high/low temperatures mapped to World Meteorological Organization (WMO) weather symbols.
 * **⚠️ Dynamic Biometeorological Alert Panel**: Real-time environmental stress diagnostic alert system (extreme temperatures, low pressure, wind gusts) that displays health risks and guidelines.
-* **🗺️ Interactive Map Visualizations**: Premium embedded Windy.com satellite weather radar widgets dynamically centered on your searched coordinates, both in the main dashboard and inside the sidebar.
+* **🗺️ Interactive Map Visualizations**: Premium embedded Windy.com satellite weather radar widgets dynamically centered on your searched coordinates, featuring an interactive multi-layer map in the main tab and a clean visual live preview in the sidebar.
 * **⚙️ Deep Learning Model Studio**: Interactive dashboard panel to customize hidden layers, learning rate, batch size, and train a custom PyTorch sequence model on the fly with live MSE loss curves.
 
 ---

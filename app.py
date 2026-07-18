@@ -799,7 +799,11 @@ st.sidebar.markdown("""
 mini_windy_url = f"https://embed.windy.com/embed2.html?lat={active_lat}&lon={active_lon}&zoom=5&level=surface&overlay=radar&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=false&metricWind=default&metricTemp=default&radarRange=-1"
 
 with st.sidebar:
-    st.components.v1.iframe(mini_windy_url, height=180, scrolling=False)
+    st.components.v1.html(f"""
+    <div style="pointer-events: none; width: 100%; height: 200px; overflow: hidden; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+        <iframe src="{mini_windy_url}" width="100%" height="200" style="border: none;" scrolling="no"></iframe>
+    </div>
+    """, height=202)
 
 # 7-day extended forecast row
 st.sidebar.markdown("""
